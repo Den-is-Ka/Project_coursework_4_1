@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+
+<div style="background:#f9f9f9;padding:15px;border-radius:10px;margin-bottom:20px;">
+  <p><strong>Статус рассылки:</strong> {{ mailing.get_status_display }}</p>
+  <p><strong>Дата начала:</strong> {{ mailing.start_date }}</p>
+  <p><strong>Дата завершения:</strong> {{ mailing.end_date }}</p>
+  <p><strong>Сообщение:</strong> {{ mailing.message.subject }}</p>
+  <p><strong>Клиентов:</strong> {{ mailing.clients.count }}</p>
+</div>
+
+<h2>📋 Попытки отправки</h2>
+{% if attempts %}
+  <table border="1" cellspacing="0" cellpadding="8" style="width:100%;border-collapse:collapse;">
+    <tr style="background:#eee;">
+      <th>ID</th>
+      <th>Дата и время</th>
+      <th>Статус</th>
+      <th>Ответ сервера</th>
+    </tr>
+    {% for a in attempts %}
+    <tr>
+      <td>{{ a.id }}</td>
+      <td>{{ a.datetime|date:"d.m.Y H:i" }}</td>
+      <td>
+        {% if a.status == "success" %}
+          ✅ Успешно
+        {% else %}
+          ❌ Ошибка
+        {% endif %}
+      </td>
+      <td>{{ a.server_response|default:"—" }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <p><strong>Всего попыток:</strong> {{ total_attempts }}</p>
+  <p><strong>Успешных:</strong> {{ success_count }}</p>
+  <p><strong>Ошибок:</strong> {{ failed_count }}</p>
+  <p><strong>Процент успеха:</strong> {{ success_percent }}%</p>
+{% else %}
+  <p>Нет данных о попытках для этой рассылки.</p>
+{% endif %}
+
+<hr>
+<a href="{% url 'mailing:mailing_list' %}">← Назад к списку рассылок</a>
+{% endblock %}

@@ -1,0 +1,4 @@
+{% if title == "Рассылки" and obj.pk %}
+  <a href="{{ obj.pk }}/report/">📄 Отчёт</a>
+  <a href="{% url 'mailing:mailing_send' obj.pk %}">🚀 Отправить</a>
+{% endif %}

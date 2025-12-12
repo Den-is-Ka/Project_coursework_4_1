@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title|default:"Главная" }}</h1>
+
+<div style="padding: 20px; background: #f5f5f5; border-radius: 10px; margin-bottom: 20px;">
+  <h2>📊 Статистика рассылок</h2>
+  <p><strong>Всего рассылок:</strong> {{ total_mailings|default:0 }}</p>
+  <p><strong>Активных рассылок:</strong> {{ active_mailings|default:0 }}</p>
+  <p><strong>Уникальных клиентов:</strong> {{ unique_clients|default:0 }}</p>
+  <p style="color: gray; font-size: 0.9em;"><em>Данные обновляются каждые 5 минут (кэш)</em></p>
+</div>
+
+<hr>
+
+<h2>🚀 Быстрые переходы:</h2>
+<ul style="line-height: 1.8em;">
+  <li><a href="{% url 'mailing:client_list' %}">Клиенты</a></li>
+  <li><a href="{% url 'mailing:message_list' %}">Сообщения</a></li>
+  <li><a href="{% url 'mailing:mailing_list' %}">Рассылки</a></li>
+  <li><a href="{% url 'mailing:attempt_list' %}">Попытки рассылки</a></li>
+</ul>
+{% endblock %}

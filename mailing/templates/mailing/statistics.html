@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>{{ title }}</h1>
+
+<div style="background: #f9f9f9; padding: 20px; border-radius: 10px;">
+  <h2>📈 Статистика попыток рассылок</h2>
+  <p><strong>Всего попыток:</strong> {{ total_attempts }}</p>
+  <p><strong>Успешных попыток:</strong> {{ success_attempts }}</p>
+  <p><strong>Неуспешных попыток:</strong> {{ failed_attempts }}</p>
+  <p><strong>Процент успеха:</strong> {{ success_percent }}%</p>
+</div>
+
+<hr>
+<a href="{% url 'mailing:index' %}" style="text-decoration: none;">← На главную</a>
+{% endblock %}

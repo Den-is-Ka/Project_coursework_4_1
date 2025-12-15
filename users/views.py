@@ -6,10 +6,11 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import UpdateView
 from .models import User
 
+
 class RegisterView(CreateView):
     form_class = RegisterForm
     template_name = "users/register.html"
-    success_url = reverse_lazy("login")
+    success_url = reverse_lazy("users:login")
 
 
 class CustomLoginView(LoginView):
@@ -17,7 +18,11 @@ class CustomLoginView(LoginView):
 
 
 class CustomLogoutView(LogoutView):
-    next_page = reverse_lazy("login")
+    next_page = reverse_lazy("users:login")
+
+    def get(self, request, *args, **kwargs):
+        """Разрешаем выход через обычную ссылку"""
+        return self.post(request, *args, **kwargs)
 
 
 class ProfileView(TemplateView):

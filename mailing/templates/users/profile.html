@@ -6,5 +6,5 @@
 <p><strong>Телефон:</strong> {{ user.phone }}</p>
 <p><strong>Страна:</strong> {{ user.country }}</p>
 <p><strong>Email подтвержден:</strong> {{ user.email_confirmed|yesno:"✅ Да,❌ Нет" }}</p>
-<a href="{% url 'logout' %}">Выйти</a>
+<a href="{% url 'users:logout' %}">Выйти</a>
 {% endblock %}

@@ -1,7 +1,10 @@
 from django.urls import path
 from .views import (
-    RegisterView, CustomLoginView, CustomLogoutView,
-    ProfileView, ProfileUpdateView
+    RegisterView,
+    CustomLoginView,
+    CustomLogoutView,
+    ProfileView,
+    ProfileUpdateView,
 )
 
 app_name = "users"

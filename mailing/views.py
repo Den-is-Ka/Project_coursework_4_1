@@ -8,6 +8,7 @@ from .models import Client, Message, Mailing, Attempt
 from django.shortcuts import get_object_or_404, redirect
 from django.contrib import messages
 from django.views import View
+from .forms import MailingForm
 
 
 # Миксины
@@ -73,7 +74,7 @@ class MailingListView(OwnerFilterMixin, ListView):
 
 class MailingCreateView(OwnerFilterMixin, CreateView):
     model = Mailing
-    fields = ["start_date", "end_date", "status", "message", "clients"]
+    form_class = MailingForm
     template_name = "mailing/form.html"
     success_url = reverse_lazy("mailing:mailing_list")
     extra_context = {"title": "Создать рассылку"}
@@ -81,7 +82,7 @@ class MailingCreateView(OwnerFilterMixin, CreateView):
 
 class MailingUpdateView(OwnerOrManagerMixin, UpdateView):
     model = Mailing
-    fields = ["start_date", "end_date", "status", "message", "clients"]
+    form_class = MailingForm
     template_name = "mailing/form.html"
     success_url = reverse_lazy("mailing:mailing_list")
     extra_context = {"title": "Редактировать рассылку"}
